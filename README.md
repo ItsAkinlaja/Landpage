@@ -1,4 +1,4 @@
-his project demonstrates an introduction page with typing animation and effects. 
+This project demonstrates an introduction page with typing animation and effects. 
 It showcases a series of phrases displayed as if being typed out, followed by a final message. 
 The page features an animated border effect around the text and a universal black background. The final message encourages engagement with emojis and instructions.
 
