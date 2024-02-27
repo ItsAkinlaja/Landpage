@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akinlaja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Share Tech Mono', monospace;
+            background: #000;
+            overflow: hidden;
+        }
+        .background-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://wallpapers.com/images/high/one-piece-monkey-d-luffy-black-and-white-pfp-izb8nxpz05oj3f09.webp') no-repeat center center fixed;
+            background-size: contain;
+            filter: grayscale(100%);
+            animation: animateBackground 10s ease-in-out infinite;
+        }
+        .content {
+            position: relative;
+            z-index: 10;
+            color: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+        .typed-text {
+            font-size: 2em;
+            height: 1.2em;
+            overflow: hidden;
+            border-right: 0.15em solid orange;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: blinkCursor 0.75s steps(2, start) infinite;
+        }
+        .final-message {
+            display: none;
+            font-size: 1.5em;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+        .bouncing-ball {
+            position: absolute;
+            bottom: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: orange;
+            animation: bounce-vertical 0.9s ease-in-out infinite;
+        }
+        .thunderbolt {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            fill: orange; 
+            animation: glow 2s infinite alternate;
+        }
+        .supercharge-beam {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: orange; 
+            animation: moveBeam 2s infinite linear;
+            box-shadow: 0 0 10px orange, 0 0 20px orange;
+        }
+        .top-left { top: 10px; left: 10px; }
+        .top-right { top: 10px; right: 10px; }
+        .bottom-left { bottom: 10px; left: 10px; }
+        .bottom-right { bottom: 10px; right: 10px; }
+        @keyframes blinkCursor {
+            from { border-right-color: orange; }
+            to { border-right-color: transparent; }
+        }
+        @keyframes animateBackground {
+            0%, 100% { filter: grayscale(100%); }
+            50% { filter: grayscale(0%); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes bounce-vertical {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px orange); }
+            to { filter: drop-shadow(0 0 20px orange); }
+        }
+        @keyframes moveBeam {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
+        }
+    </style>
+</head>
+<body>
+<div class="background-animation"></div>
+<div class="supercharge-beam"></div>
+<div class="content">
+    <svg class="thunderbolt top-left" viewBox="0 0 50 50">
+        <polygon points="20,1 40,20 30,20 50,50 30,50 20,30 30,30" fill="currentColor"/>
+    </svg>
+    <svg class="thunderbolt top-right" viewBox="0 0 50 50">
+        <polygon points="20,1 40,20 30,20 50,50 30,50 20,30 30,30" fill="currentColor"/>
+    </svg>
+    <svg class="thunderbolt bottom-left" viewBox="0 0 50 50">
+        <polygon points="20,1 40,20 30,20 50,50 30,50 20,30 30,30" fill="currentColor"/>
+    </svg>
+    <svg class="thunderbolt bottom-right" viewBox="0 0 50 50">
+        <polygon points="20,1 40,20 30,20 50,50 30,50 20,30 30,30" fill="currentColor"/>
+    </svg>
+    <div id="typed-text" class="typed-text"></div>
+    <div id="final-message" class="final-message">
+        To see more of this, 👍 Like, 💬 Comment, and 🔔 Follow! <br> 🚀✨🎉
+    </div>
+    <div class="bouncing-ball"></div>
+</div>
+<script>
+    const phrases = [
+        "Hello guys!",
+        "My name is Timileyin Akinlaja",
+        "I am a frontend developer",
+        "Welcome to my portfolio!"
+    ];
+
+    let currentPhrase = 0;
+    let currentChar = 0;
+    const typedTextDiv = document.getElementById("typed-text");
+    const finalMessageDiv = document.getElementById("final-message");
+    const typingSpeed = 50; 
+    const pauseBetweenPhrases = 2000;
+
+    function typeNextChar() {
+        if (currentPhrase < phrases.length) {
+            const phrase = phrases[currentPhrase];
+            if (currentChar < phrase.length) {
+                typedTextDiv.textContent += phrase.charAt(currentChar++);
+                setTimeout(typeNextChar, typingSpeed);
+            } else {
+                setTimeout(() => {
+                    typedTextDiv.textContent = "";
+                    currentChar = 0;
+                    if (++currentPhrase < phrases.length) {
+                        typeNextChar();
+                    } else {
+                        showFinalMessage();
+                    }
+                }, pauseBetweenPhrases);
+            }
+        }
+    }
+
+    function showFinalMessage() {
+        typedTextDiv.style.display = 'none';
+        finalMessageDiv.style.display = 'block';
+    }
+
+    typeNextChar();
+</script>
+</body>
+</html>
